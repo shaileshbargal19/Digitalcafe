@@ -4,6 +4,6 @@ const API_BASE_URL =
   process.env.REACT_APP_API_URL ||
   (window.location.hostname === 'localhost'
     ? 'http://localhost:8080/api'
-    : 'https://digitalcafe.onrender.com/api');
+    : 'https://digitalcafe-5u2v.onrender.com/api');
 
 export default API_BASE_URL;
