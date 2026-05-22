@@ -1,0 +1,702 @@
+/* ╔═══════════════════════════════════════════════════════════════════╗
+   ║  AUTH STYLES — Login & Register                                   ║
+   ║  Uses exact same variables as AdminDashboardNew.css               ║
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ── Inherits root variables from LandingStyles.css ─────────────────── */
+/* Additional auth-specific variables */
+:root {
+    --r: 14px;
+    --r-sm: 8px;
+    --red-soft: #fef2f2;
+}
+
+/* ══ PAGE WRAPPER ════════════════════════════════════════════════════ */
+.advanced-registration-view {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    position: relative;
+    padding: 40px 20px;
+}
+
+/* Decorative bg shapes (very subtle, matching dashboard feel) */
+.floating-background {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: blobFloat 16s ease-in-out infinite;
+}
+
+.b1 {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    left: -100px;
+    background: radial-gradient(circle, rgba(59, 130, 246, .07), transparent 70%);
+}
+
+.b2 {
+    width: 350px;
+    height: 350px;
+    bottom: -80px;
+    right: -80px;
+    background: radial-gradient(circle, rgba(139, 92, 246, .05), transparent 70%);
+    animation-delay: 6s;
+}
+
+/* ══ WRAPPER ═════════════════════════════════════════════════════════ */
+.register-glass-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1020px;
+}
+
+.login-compact {
+    max-width: 860px;
+}
+
+/* Back link — like adn-nav-item style */
+.nav-back-elite {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--text-2);
+    text-decoration: none;
+    font-size: .82rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    padding: 7px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    transition: background .15s, border-color .15s, color .15s;
+    box-shadow: var(--shadow);
+}
+
+.nav-back-elite:hover {
+    background: var(--blue-soft);
+    border-color: var(--blue);
+    color: var(--blue);
+}
+
+/* ══ MAIN BOX — like adn-chart-card ═════════════════════════════════ */
+.elite-registration-box {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+/* ══ SIDEBAR — like adn-sidebar ══════════════════════════════════════ */
+.registration-sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-brand {
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .96rem;
+    font-weight: 800;
+    color: var(--text);
+}
+
+.brand-logo::before {
+    content: '☕';
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, .3);
+}
+
+.text-gold {
+    color: var(--orange);
+}
+
+/* Step items — exactly like adn-nav-item */
+.step-indicators {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--r-sm);
+    transition: background .15s, color .15s;
+    cursor: default;
+}
+
+.step-item.active {
+    /* Background handled by inline glassmorphism to better match imagery */
+}
+
+.step-item.completed {
+    background: var(--green-soft);
+}
+
+.step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .72rem;
+    font-weight: 800;
+    color: var(--text-3);
+    flex-shrink: 0;
+    transition: all .2s;
+}
+
+.step-item.active .step-num {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, .3);
+}
+
+.step-item.completed .step-num {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+}
+
+.step-label {
+    font-size: .82rem;
+    font-weight: 500;
+    color: var(--text-3);
+}
+
+.step-item.active .step-label {
+    color: var(--blue);
+    font-weight: 700;
+}
+
+.step-item.completed .step-label {
+    color: var(--green);
+    font-weight: 600;
+}
+
+.sidebar-footer {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.sidebar-footer p {
+    font-size: .74rem;
+    color: var(--text-3);
+    line-height: 1.5;
+}
+
+/* Login sidebar variant */
+.login-side {
+    justify-content: space-between;
+}
+
+.login-side-content {
+    padding: 8px 0;
+}
+
+.login-side-content h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.login-side-content p {
+    font-size: .84rem;
+    color: var(--text-2);
+    line-height: 1.6;
+}
+
+/* ══ MAIN FORM AREA ══════════════════════════════════════════════════ */
+.registration-main {
+    padding: 36px 40px;
+    overflow-y: auto;
+}
+
+.main-header {
+    margin-bottom: 28px;
+}
+
+.stage-title {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stage-title::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 2px;
+    background: var(--blue);
+    border-radius: 99px;
+}
+
+.main-header h2 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -.4px;
+}
+
+/* ══ PROGRESS BAR ════════════════════════════════════════════════════ */
+.progress-track {
+    height: 4px;
+    background: var(--border);
+    border-radius: 99px;
+    margin-bottom: 28px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    border-radius: 99px;
+    transition: width .4s ease;
+}
+
+/* ══ FORM ELEMENTS — same as adn-search-box ═════════════════════════ */
+.elite-form-matrix {
+    width: 100%;
+}
+
+.matrix-pane {
+    display: flex;
+    flex-direction: column;
+}
+
+.animate-pane {
+    animation: fadeUp .28s ease;
+}
+
+.matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field-group.full-width {
+    grid-column: 1/-1;
+}
+
+.field-group label {
+    font-size: .72rem;
+    font-weight: 700;
+    color: var(--text-2);
+    letter-spacing: .3px;
+    text-transform: uppercase;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 10px 13px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: .86rem;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+    width: 100%;
+}
+
+.field-group input::placeholder,
+.field-group textarea::placeholder {
+    color: var(--text-3);
+}
+
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus {
+    border-color: var(--blue);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, .12);
+}
+
+.field-group select option {
+    background: var(--surface);
+    color: var(--text);
+}
+
+.field-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.elite-select {
+    background: var(--bg) !important;
+    border: 1.5px solid var(--border) !important;
+    border-radius: var(--r-sm) !important;
+    padding: 10px 13px !important;
+    color: var(--text) !important;
+    font-family: inherit;
+    font-size: .86rem;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.elite-select:focus {
+    border-color: var(--blue) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, .12) !important;
+}
+
+/* ══ ROLE CARDS — like adn-summary-card ═════════════════════════════ */
+.role-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.role-card {
+    padding: 14px 16px;
+    border-radius: var(--r);
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+    text-align: left;
+}
+
+.role-card:hover {
+    border-color: var(--blue);
+    background: var(--blue-soft);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.role-card.selected {
+    border-color: var(--blue);
+    background: var(--blue-soft);
+    box-shadow: var(--shadow);
+}
+
+.role-card .icon {
+    font-size: 1.3rem;
+    margin-bottom: 7px;
+}
+
+.role-card h4 {
+    font-size: .86rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+}
+
+.role-card p {
+    font-size: .73rem;
+    color: var(--text-2);
+    line-height: 1.4;
+}
+
+/* ══ ROLE SPECIFIC ═══════════════════════════════════════════════════ */
+.role-specific {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+/* ══ PREFERENCES TOGGLE ══════════════════════════════════════════════ */
+.preference-toggle {
+    display: flex;
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    background: var(--bg);
+}
+
+.pref-btn {
+    flex: 1;
+    padding: 9px;
+    border: none;
+    background: transparent;
+    color: var(--text-2);
+    font-weight: 600;
+    font-size: .8rem;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+}
+
+.pref-btn.active {
+    background: var(--blue);
+    color: white;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, .3);
+}
+
+/* ══ FILE UPLOAD ══════════════════════════════════════════════════════ */
+.upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: var(--r);
+    padding: 28px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    background: var(--bg);
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+    border-color: var(--blue);
+    background: var(--blue-soft);
+}
+
+.upload-zone .up-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.upload-zone p {
+    font-size: .82rem;
+    color: var(--text-2);
+    line-height: 1.6;
+}
+
+.upload-zone .filename {
+    margin-top: 6px;
+    font-weight: 700;
+    color: var(--blue);
+    font-size: .8rem;
+}
+
+/* ══ TOGGLE CHECKBOX ══════════════════════════════════════════════════ */
+.toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+}
+
+.toggle-row input[type="checkbox"] {
+    accent-color: var(--blue);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.toggle-row label {
+    font-size: .83rem;
+    color: var(--text-2);
+    cursor: pointer;
+}
+
+/* ══ BUTTONS ══════════════════════════════════════════════════════════ */
+.form-actions-elite {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+}
+
+/* Primary — matches adn-btn-download */
+.btn-elite-gold {
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 26px;
+    font-weight: 700;
+    font-size: .88rem;
+    cursor: pointer;
+    transition: opacity .18s, transform .15s;
+    font-family: inherit;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, .3);
+}
+
+.btn-elite-gold:hover {
+    opacity: .9;
+    transform: translateY(-1px);
+}
+
+.btn-elite-gold:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.w-full-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Secondary — matches back/outline style */
+.btn-back-plain {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    color: var(--text-2);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: .86rem;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+    font-family: inherit;
+}
+
+.btn-back-plain:hover {
+    background: var(--bg);
+    border-color: var(--text-3);
+}
+
+/* ══ LOGIN SPECIFIC ═══════════════════════════════════════════════════ */
+.login-options {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.login-options a {
+    font-size: .8rem;
+    color: var(--text-3);
+    text-decoration: none;
+    transition: color .15s;
+    font-weight: 500;
+}
+
+.login-options a:hover {
+    color: var(--blue);
+}
+
+.auth-footer-simple {
+    text-align: center;
+    padding-top: 4px;
+}
+
+.auth-footer-simple p {
+    font-size: .84rem;
+    color: var(--text-2);
+}
+
+.text-gold {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.text-gold:hover {
+    text-decoration: underline;
+    color: var(--blue-dark);
+}
+
+/* ══ SPACING UTILS ════════════════════════════════════════════════════ */
+.mt-2 {
+    margin-top: 10px;
+}
+
+.mt-4 {
+    margin-top: 16px;
+}
+
+/* ══ ANIMATIONS ═══════════════════════════════════════════════════════ */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blobFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    40% {
+        transform: translate(12px, -12px) scale(1.03);
+    }
+
+    70% {
+        transform: translate(-8px, 6px) scale(.98);
+    }
+}
+
+/* ══ RESPONSIVE ═══════════════════════════════════════════════════════ */
+@media (max-width: 780px) {
+    .elite-registration-box {
+        grid-template-columns: 1fr;
+    }
+
+    .registration-sidebar {
+        display: none;
+    }
+
+    .registration-main {
+        padding: 28px 22px;
+    }
+
+    .matrix-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .role-cards {
+        grid-template-columns: 1fr;
+    }
+}

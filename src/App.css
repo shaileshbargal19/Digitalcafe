@@ -1,0 +1,12 @@
+/* Main App Container */
+.App {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Ensure sections are relative for any absolute decorations */
+section {
+  position: relative;
+  width: 100%;
+}

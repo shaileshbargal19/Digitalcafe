@@ -1,0 +1,175 @@
+/* ─── Cafe Grid & Boxes ────────────────────────────────────────────────────── */
+.adn-cafe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.adn-cafe-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    transition: transform .25s cubic-bezier(.4, 0, .2, 1), box-shadow .25s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.adn-cafe-box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.adn-cafe-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orange), var(--red));
+    opacity: 0;
+    transition: opacity .25s;
+}
+
+.adn-cafe-box:hover::before {
+    opacity: 1;
+}
+
+.adn-cafe-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.adn-cafe-icon-lg {
+    width: 48px;
+    height: 48px;
+    background: var(--orange-soft);
+    color: var(--orange);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.adn-cafe-title-wrap h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text);
+}
+
+.adn-cafe-location {
+    font-size: .8rem;
+    color: var(--text-3);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.adn-cafe-stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    background: var(--bg);
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.adn-cafe-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.adn-cafe-stat-label {
+    font-size: .68rem;
+    font-weight: 600;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.adn-cafe-stat-value {
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.adn-cafe-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+
+.adn-cafe-owner {
+    font-size: .82rem;
+    color: var(--text-2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.adn-cafe-owner-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .65rem;
+    font-weight: 700;
+    color: var(--text-2);
+}
+
+.adn-cafe-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.adn-cafe-badge.active {
+    background: var(--green-soft);
+    color: var(--green);
+}
+
+.adn-cafe-badge.pending {
+    background: var(--orange-soft);
+    color: var(--orange);
+}
+
+.adn-cafe-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.adn-btn-outline {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all .2s;
+    text-align: center;
+}
+
+.adn-btn-outline:hover {
+    background: var(--bg);
+    border-color: var(--text-3);
+}
