@@ -1,6 +1,7 @@
 package com.digitalcafe.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
@@ -12,10 +13,13 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Value("${spring.mail.username}")
+    private String fromEmail;
+
     @Async
     public void sendRegistrationNotification(String toEmail, String name) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("shaileshbargal19@gmail.com");
+        message.setFrom(fromEmail);
         message.setTo(toEmail);
         message.setSubject("Registration Received - Digital Cafe");
         
@@ -40,7 +44,7 @@ public class EmailService {
     @Async
     public void sendApprovalTempPassword(String toEmail, String name, String tempPassword) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("shaileshbargal19@gmail.com");
+        message.setFrom(fromEmail);
         message.setTo(toEmail);
         message.setSubject("Account Approved - Your Temporary Password");
         
@@ -69,7 +73,7 @@ public class EmailService {
     @Async
     public void sendPasswordResetOTP(String toEmail, String name, String otp) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("shaileshbargal19@gmail.com");
+        message.setFrom(fromEmail);
         message.setTo(toEmail);
         message.setSubject("Password Reset OTP - Digital Cafe");
         
@@ -97,7 +101,7 @@ public class EmailService {
     public void sendCredentials(String toEmail, String temporaryPassword, String otp) {
         // Keeping this for Staff Registration (Owner adding Chef/Waiter)
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("shaileshbargal19@gmail.com");
+        message.setFrom(fromEmail);
         message.setTo(toEmail);
         message.setSubject("Welcome to Digital Cafe - Your Staff Credentials");
         
