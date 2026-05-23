@@ -20,7 +20,13 @@ const ForgotPassword = () => {
         try {
             const response = await fetch(`${API_BASE_URL}/auth/forgot-password?email=${encodeURIComponent(email)}`, { method: 'POST' });
             if (response.ok) {
-                addToast('OTP sent to your email!', 'success');
+                const data = await response.json();
+                if (data.otpBackup) {
+                    addToast(`OTP generated: ${data.otpBackup} (auto-filled)`, 'success', 15000);
+                    setOtp(data.otpBackup);
+                } else {
+                    addToast('OTP sent to your email!', 'success');
+                }
                 setStep(2);
             } else {
                 const msg = await response.text();

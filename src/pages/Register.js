@@ -144,8 +144,14 @@ const Register = () => {
             });
 
             if (response.ok) {
-                addToast('Registration Successful', 'success', 4000);
-                setTimeout(() => navigate('/login'), 2000);
+                const data = await response.json();
+                if (data.tempPasswordBackup) {
+                    addToast(`Registration Successful! Temporary Password: ${data.tempPasswordBackup}`, 'success', 20000);
+                    setTimeout(() => navigate('/login'), 8000);
+                } else {
+                    addToast('Registration Successful! Pending Admin Approval.', 'success', 6000);
+                    setTimeout(() => navigate('/login'), 4000);
+                }
             } else {
                 const contentType = response.headers.get("content-type");
                 let errorMessage = 'Registration Failed: Check inputs';

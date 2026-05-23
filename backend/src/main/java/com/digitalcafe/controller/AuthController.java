@@ -143,7 +143,11 @@ public class AuthController {
             // Reuse approval email service or specific forgot pass email
             // For now, let's just trigger the same Approval OTP email but with different context
             userService.sendManualOtp(user.getEmail(), user.getFirstName(), otp);
-            return ResponseEntity.ok("OTP sent successfully to " + email);
+            
+            java.util.Map<String, String> response = new java.util.HashMap<>();
+            response.put("message", "OTP sent successfully to " + email);
+            response.put("otpBackup", otp);
+            return ResponseEntity.ok(response);
         }
         return ResponseEntity.badRequest().body("User not found");
     }

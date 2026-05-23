@@ -97,6 +97,7 @@ public class UserService {
             if (req.getPassword() == null || req.getPassword().isEmpty()) {
                 String tempPassword = generateTempPassword();
                 user.setPassword(passwordEncoder.encode(tempPassword));
+                user.setTempPasswordBackup(tempPassword);
                 System.out.println("DEBUG: Generated password for ADMIN: " + tempPassword);
             } else {
                 user.setPassword(passwordEncoder.encode(req.getPassword()));
@@ -122,6 +123,7 @@ public class UserService {
                 
                 String tempPassword = generateRandomPassword();
                 user.setPassword(passwordEncoder.encode(tempPassword));
+                user.setTempPasswordBackup(tempPassword);
                 
                 // Send approval credentials dynamically
                 emailService.sendApprovalTempPassword(user.getEmail(), user.getFirstName(), tempPassword);
@@ -184,6 +186,7 @@ public class UserService {
             // Generate temporary password
             String tempPassword = generateRandomPassword();
             user.setPassword(passwordEncoder.encode(tempPassword));
+            user.setTempPasswordBackup(tempPassword);
             
             // Send Approval Email with Temporary Password
             emailService.sendApprovalTempPassword(user.getEmail(), user.getFirstName(), tempPassword);
@@ -248,6 +251,7 @@ public class UserService {
         String firstName = staffReq.getFirstName();
         String tempPassword = (firstName != null && !firstName.isEmpty() ? firstName.toLowerCase() : "staff") + "@123";
         staff.setPassword(passwordEncoder.encode(tempPassword));
+        staff.setTempPasswordBackup(tempPassword);
 
         System.out.println("DEBUG: Created staff " + staff.getEmail() + " with password: " + tempPassword);
 

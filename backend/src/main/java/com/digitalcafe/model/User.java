@@ -52,6 +52,9 @@ public abstract class User {
     private String otp; 
     private LocalDateTime createdAt;
 
+    @Transient
+    private String tempPasswordBackup;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
